@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Item</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+
+      h2 {
+        margin-top: 50px;
+        margin-bottom: 20px;
+        font-size: 36px;
+        color: #333;
+      }
+
+      label {
+        width: 120px;
+        display: inline-block;
+        text-align: right;
+        margin-bottom: 5px;
+      }
+
+      select {
+        width: 15%;
+        /* margin-bottom: 10px; */
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Add Item To Store</h2>
+    <form id="addItemForm">
+      <label for="category">Category:</label>
+      <select id="category" name="category">
+        <option value="processors">Processors</option>
+        <option value="gpus">GPUs</option>
+        <option value="memory">Memory</option></select
+      ><br /><br />
+      <label for="brand">Brand Name:</label>
+      <input type="text" id="brand" name="brand" required /><br /><br />
+      <label for="productName">Product Name:</label>
+      <input
+        type="text"
+        id="productName"
+        name="productName"
+        required
+      /><br /><br />
+      <label for="price">Price:</label>
+      <input type="number" id="price" name="price" required /><br /><br />
+      <button type="button" onclick="addItemToStore()">Add Item</button>
+    </form>
+
+    <script>
+      function addItemToStore() {
+        // Retrieve form data
+        var category = document.getElementById("category").value;
+        var brand = document.getElementById("brand").value;
+        var productName = document.getElementById("productName").value;
+        var price = document.getElementById("price").value;
+
+        // Simulate sending data to server-side script for adding item to store
+        // Here, you would make an AJAX request or submit a form to your server-side script
+        // For demonstration purposes, let's just display an alert
+        alert(
+          "Item added successfully to " +
+            category +
+            " category: " +
+            brand +
+            " " +
+            productName +
+            " ($" +
+            price +
+            ")"
+        );
+
+        // Optionally, you can redirect the user back to the index.html page after adding the item
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

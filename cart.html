@@ -41,6 +41,10 @@
         border-radius: 4px;
         cursor: pointer;
       }
+
+      .checkout-btn:hover {
+        background-color: #3b883e;
+      }
     </style>
   </head>
   <body>
@@ -65,6 +69,7 @@
       function checkOut() {
         // Handle the checkout process here
         alert("Checking out...");
+        window.location.href = "checkout.html";
       }
 
       // Sample function to fetch and display cart items (You'll replace this with your actual logic)
