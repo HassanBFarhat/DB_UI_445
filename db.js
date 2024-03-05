@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('Farhat_Hassan_&_Bavisetty_Avinash_queries.sql');
 
 // Create a connection pool
 const pool = mysql.createPool({
