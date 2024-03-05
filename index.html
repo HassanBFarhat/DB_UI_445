@@ -3,18 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MySQL Query Interface</title>
+    <title>PC PART STORE</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      label {
+        width: 100px;
+        display: inline-block;
+        text-align: left;
+      }
+      select {
+        width: 15%;
+      }
+      #cart {
+        margin-left: 10%;
+      }
+    </style>
   </head>
   <body>
-    <h1>MySQL Query Interface</h1>
-    <form id="queryForm">
-      <label for="sqlQuery">Enter SQL Query:</label><br />
-      <textarea id="sqlQuery" name="sqlQuery" rows="4" cols="50"></textarea
-      ><br />
-      <button type="submit">Submit Query</button>
-    </form>
-    <div id="queryResult"></div>
+    <h1>PC PART STORE</h1>
+    <h2>
+      Pick PC Parts to Add to Cart
+      <button id="cart" onclick="openCart()">CART</button>
+    </h2>
+    <br />
+    <label for="processors">Processors:</label>
+    <select id="processors">
+      <!-- Options for processors -->
+    </select>
+    <br />
+    <label for="gpus">GPUs:</label>
+    <select id="gpus">
+      <!-- Options for GPUs -->
+    </select>
+    <br />
+    <label for="memory">Memory:</label>
+    <select id="memory">
+      <!-- Options for memory -->
+    </select>
+    <br />
+    <label for="storage">Storage:</label>
+    <select id="storage">
+      <!-- Options for storage -->
+    </select>
+    <br />
+    <label for="mobos">MOBOs:</label>
+    <select id="mobos">
+      <!-- Options for MOBOs -->
+    </select>
+    <br />
+    <label for="psus">PSUs:</label>
+    <select id="psus">
+      <!-- Options for PSUs -->
+    </select>
+    <br />
+    <label for="cases">Cases:</label>
+    <select id="cases">
+      <!-- Options for cases -->
+    </select>
+    <br />
+    <label for="cooling">Cooling:</label>
+    <select id="cooling">
+      <!-- Options for cooling -->
+    </select>
+    <br />
+    <label for="peripherals">Peripherals:</label>
+    <select id="peripherals">
+      <!-- Options for peripherals -->
+    </select>
+    <br /><br />
+    <button onclick="addToCart()">Add to Cart</button>
+    <br /><br />
+    <a href="#" onclick="suggestItem()">
+      Add an Item you'd like to see in the store?
+    </a>
 
-    <script src="query.js"></script>
+    <script>
+      function openCart() {
+        // Functionality to open the cart
+      }
+
+      function addToCart() {
+        // Functionality to add selected items to the cart
+      }
+
+      function suggestItem() {
+        // Functionality to handle user suggestion for new item
+      }
+    </script>
   </body>
 </html>
