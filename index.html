@@ -74,6 +74,7 @@
         margin-top: 20px;
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <h1>PC PART STORE</h1>
@@ -134,6 +135,150 @@
     </a>
 
     <script>
+      $.ajax({
+        url: "http://localhost:3000/api/getProcessors", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (processors) {
+          // Populate the processors dropdown with the fetched data
+          processors.forEach(function (processor) {
+            $("#processors").append(
+              `<option value="${processor.ProductID}">${processor.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getGPUs", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (gpus) {
+          // Populate the processors dropdown with the fetched data
+          gpus.forEach(function (gpus) {
+            $("#gpus").append(
+              `<option value="${gpus.ProductID}">${gpus.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getMemory", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (memory) {
+          // Populate the processors dropdown with the fetched data
+          memory.forEach(function (memory) {
+            $("#memory").append(
+              `<option value="${memory.ProductID}">${memory.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getStorage", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (storage) {
+          // Populate the processors dropdown with the fetched data
+          storage.forEach(function (storage) {
+            $("#storage").append(
+              `<option value="${storage.ProductID}">${storage.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getMOBOs", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (mobos) {
+          // Populate the processors dropdown with the fetched data
+          mobos.forEach(function (mobos) {
+            $("#mobos").append(
+              `<option value="${mobos.ProductID}">${mobos.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getPSUs", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (psus) {
+          // Populate the processors dropdown with the fetched data
+          psus.forEach(function (psus) {
+            $("#psus").append(
+              `<option value="${psus.ProductID}">${psus.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getCases", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (cases) {
+          // Populate the processors dropdown with the fetched data
+          cases.forEach(function (cases) {
+            $("#cases").append(
+              `<option value="${cases.ProductID}">${cases.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getCooling", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (cooling) {
+          // Populate the processors dropdown with the fetched data
+          cooling.forEach(function (cooling) {
+            $("#cooling").append(
+              `<option value="${cooling.ProductID}">${cooling.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/api/getPeripherals", // URL of your Node.js server endpoint
+        method: "GET",
+        success: function (peripherals) {
+          // Populate the processors dropdown with the fetched data
+          peripherals.forEach(function (peripherals) {
+            $("#peripherals").append(
+              `<option value="${peripherals.ProductID}">${peripherals.ProductName}</option>`
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error fetching processors:", error);
+        },
+      });
+
       function openCart() {
         // Functionality to open the cart
         window.location.href = "cart.html"; // Redirect to cart.html
