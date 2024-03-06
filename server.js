@@ -1,9 +1,14 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
+
+const bodyParser = require('body-parser');
+
 const cors = require('cors'); // Import the cors middleware
 
 const app = express();
 const PORT = 3000;
+
+app.use(bodyParser.json());
 
 // Enable CORS middleware
 app.use(cors());
@@ -115,6 +120,30 @@ app.get('/api/getGPUs', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch processors' });
     }
   });
+
+app.post('/api/addNewItem', async (req, res) => {
+  try {
+    // Check if all required properties are present in the request body
+    const { CategoryID, Brand, ProductName, UnitPrice } = req.body;
+    if (!CategoryID || !Brand || !ProductName || !UnitPrice) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Insert the new item into the database
+    const connection = await pool.getConnection();
+    await connection.execute(
+        `INSERT INTO Product (CategoryID, Brand, ProductName, UnitPrice) VALUES (?, ?, ?, ?)`,
+        [CategoryID, Brand, ProductName, UnitPrice]
+    );
+    connection.release();
+
+    // Respond with success message
+    return res.status(200).json({ message: 'Item added successfully' });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    return res.status(500).json({ error: 'Failed to add item' });
+  }
+});
 
 // Start the server
 app.listen(PORT, () => {

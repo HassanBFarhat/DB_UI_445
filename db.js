@@ -3,9 +3,9 @@ const mysql = require('Farhat_Hassan_&_Bavisetty_Avinash_queries.sql');
 // Create a connection pool
 const pool = mysql.createPool({
     host: 'localhost',
-    user: 'yourusername',
-    password: 'yourpassword',
-    database: 'yourdatabase',
+    user: 'admin',
+    password: 'admin',
+    database: 'Farhat_Hassan_And_Bavisetty_Avinash_db',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0

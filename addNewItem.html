@@ -57,9 +57,15 @@
     <form id="addItemForm">
       <label for="category">Category:</label>
       <select id="category" name="category">
-        <option value="processors">Processors</option>
-        <option value="gpus">GPUs</option>
-        <option value="memory">Memory</option></select
+        <option value="1">Processors</option>
+        <option value="2">GPUs</option>
+        <option value="3">Memory</option>
+        <option value="4">Storage</option>
+        <option value="5">Motherboards</option>
+        <option value="6">Power Supplies</option>
+        <option value="7">Computer Cases</option>
+        <option value="8">Cooling Systems</option>
+        <option value="9">Peripherals</option></select
       ><br /><br />
       <label for="brand">Brand Name:</label>
       <input type="text" id="brand" name="brand" required /><br /><br />
@@ -74,32 +80,45 @@
       <input type="number" id="price" name="price" required /><br /><br />
       <button type="button" onclick="addItemToStore()">Add Item</button>
     </form>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <script>
       function addItemToStore() {
         // Retrieve form data
-        var category = document.getElementById("category").value;
-        var brand = document.getElementById("brand").value;
-        var productName = document.getElementById("productName").value;
-        var price = document.getElementById("price").value;
+        var category = $("#category").val();
+        var brand = $("#brand").val();
+        var productName = $("#productName").val();
+        var price = $("#price").val();
 
-        // Simulate sending data to server-side script for adding item to store
-        // Here, you would make an AJAX request or submit a form to your server-side script
-        // For demonstration purposes, let's just display an alert
-        alert(
-          "Item added successfully to " +
-            category +
-            " category: " +
-            brand +
-            " " +
-            productName +
-            " ($" +
-            price +
-            ")"
-        );
+        // Create an object with the form data
+        var requestData = {
+          CategoryID: category,
+          Brand: brand,
+          ProductName: productName,
+          UnitPrice: price
+        };
 
-        // Optionally, you can redirect the user back to the index.html page after adding the item
-        window.location.href = "index.html";
+        // Make an AJAX request to update the item on the server
+        $.ajax({
+          url: "http://localhost:3000/api/addNewItem",
+          type: "POST",
+          data: JSON.stringify(requestData), // Convert data to JSON
+          contentType: "application/json", // Set content type to JSON
+          success: function (response) {
+            // Handle successful response
+            alert("Item added successfully.");
+            // Optionally, you can redirect the user back to the index.html page after adding the item
+            window.location.href = "index.html";
+          },
+          error: function (xhr, status, error) {
+            // Handle errors
+            console.error("Error adding item:", error);
+            alert("An error occurred while adding the item. Please try again later.");
+          },
+        });
       }
     </script>
   </body>
