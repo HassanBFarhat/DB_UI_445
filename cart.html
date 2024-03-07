@@ -46,6 +46,7 @@
         background-color: #3b883e;
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <h1>Shopping Cart</h1>
@@ -70,8 +71,59 @@
       // Sample function to handle checkout
       function checkOut() {
         // Handle the checkout process here
+
+        const cartItems = JSON.parse(localStorage.getItem("cart-Items")) || [];
+        const transactionRequests = [];
+
+        cartItems.forEach((item) => {
+          const transactionData = {
+            ProductID: item.index,
+            Transaction: "Purchase",
+            Quantity: 1,
+            TransactionDate: new Date().toISOString().split("T")[0],
+          };
+
+          console.log(item);
+
+          transactionRequests.push(
+            $.ajax({
+              url: "http://localhost:3000/api/transactions",
+              method: "POST",
+              data: JSON.stringify(transactionData),
+              contentType: "application/json",
+              success: function (response) {
+                // Handle successful response
+                alert("Transaction added successfully.");
+                // Optionally, you can redirect the user back to the index.html page after adding the item
+                window.location.href = "index.html";
+              },
+              error: function (xhr, status, error) {
+                // Handle errors
+                console.error("Error adding transaction:", error);
+                alert(
+                  "An error occurred while adding the transaction. Please try again later."
+                );
+              },
+            })
+          );
+        });
+
+        $.when
+          .apply($, transactionRequests)
+          .then(() => {
+            localStorage.removeItem("cartItems");
+            alert("Transactions added successfully!");
+            window.location.href = "checkout.html";
+          })
+          .fail((xhr, status, error) => {
+            console.error("Error processing transactions:", error);
+            alert(
+              "An error occurred while processing transactions. Please try again later."
+            );
+          });
+
         alert("Checking out...");
-        window.location.href = "checkout.html";
+        // window.location.href = "checkout.html";
       }
 
       // Sample function to display cart items

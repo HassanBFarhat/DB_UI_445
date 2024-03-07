@@ -142,7 +142,7 @@
           // Populate the processors dropdown with the fetched data
           processors.forEach(function (processor) {
             $("#processors").append(
-              `<option value="${processor.UnitPrice}">${processor.ProductName} || Price: ${processor.UnitPrice}</option>`
+              `<option id = "${processor.ProductID}" value="${processor.UnitPrice}">${processor.ProductName} || Price: ${processor.UnitPrice}</option>`
             );
           });
         },
@@ -158,7 +158,7 @@
           // Populate the processors dropdown with the fetched data
           gpus.forEach(function (gpus) {
             $("#gpus").append(
-              `<option value="${gpus.UnitPrice}">${gpus.ProductName} || Price: ${gpus.UnitPrice}</option>`
+              `<option id = "${gpus.ProductID}" value="${gpus.UnitPrice}">${gpus.ProductName} || Price: ${gpus.UnitPrice}</option>`
             );
           });
         },
@@ -174,7 +174,7 @@
           // Populate the processors dropdown with the fetched data
           memory.forEach(function (memory) {
             $("#memory").append(
-              `<option value="${memory.UnitPrice}">${memory.ProductName} || Price: ${memory.UnitPrice}</option>`
+              `<option id = "${memory.ProductID}" value="${memory.UnitPrice}">${memory.ProductName} || Price: ${memory.UnitPrice}</option>`
             );
           });
         },
@@ -190,7 +190,7 @@
           // Populate the processors dropdown with the fetched data
           storage.forEach(function (storage) {
             $("#storage").append(
-              `<option value="${storage.UnitPrice}">${storage.ProductName} || Price: ${storage.UnitPrice}</option>`
+              `<option id = "${storage.ProductID}" value="${storage.UnitPrice}">${storage.ProductName} || Price: ${storage.UnitPrice}</option>`
             );
           });
         },
@@ -206,7 +206,7 @@
           // Populate the processors dropdown with the fetched data
           mobos.forEach(function (mobos) {
             $("#mobos").append(
-              `<option value="${mobos.UnitPrice}">${mobos.ProductName} || Price: ${mobos.UnitPrice}</option>`
+              `<option id = "${mobos.ProductID}" value="${mobos.UnitPrice}">${mobos.ProductName} || Price: ${mobos.UnitPrice}</option>`
             );
           });
         },
@@ -222,7 +222,7 @@
           // Populate the processors dropdown with the fetched data
           psus.forEach(function (psus) {
             $("#psus").append(
-              `<option value="${psus.UnitPrice}">${psus.ProductName} || Price: ${psus.UnitPrice}</option>`
+              `<option id = "${psus.ProductID}" value="${psus.UnitPrice}">${psus.ProductName} || Price: ${psus.UnitPrice}</option>`
             );
           });
         },
@@ -238,7 +238,7 @@
           // Populate the processors dropdown with the fetched data
           cases.forEach(function (cases) {
             $("#cases").append(
-              `<option value="${cases.UnitPrice}">${cases.ProductName} || Price: ${cases.UnitPrice}</option>`
+              `<option id = "${cases.ProductID}" value="${cases.UnitPrice}">${cases.ProductName} || Price: ${cases.UnitPrice}</option>`
             );
           });
         },
@@ -254,7 +254,7 @@
           // Populate the processors dropdown with the fetched data
           cooling.forEach(function (cooling) {
             $("#cooling").append(
-              `<option value="${cooling.UnitPrice}">${cooling.ProductName} || Price: ${cooling.UnitPrice}</option>`
+              `<option id = "${cooling.ProductID}" value="${cooling.UnitPrice}">${cooling.ProductName} || Price: ${cooling.UnitPrice}</option>`
             );
           });
         },
@@ -270,7 +270,7 @@
           // Populate the processors dropdown with the fetched data
           peripherals.forEach(function (peripherals) {
             $("#peripherals").append(
-              `<option value="${peripherals.UnitPrice}">${peripherals.ProductName} || Price: ${peripherals.UnitPrice}</option>`
+              `<option id = "${peripherals.ProductID}" value="${peripherals.UnitPrice}">${peripherals.ProductName} || Price: ${peripherals.UnitPrice}</option>`
             );
           });
         },
@@ -310,59 +310,111 @@
         const selectedCooling = document.getElementById("cooling").value;
         const selectedPeripheral = document.getElementById("peripherals").value;
 
-        const selectedProcessorName =
+        // Gets the selected option element for each product
+        const selectedProcessorOption =
           document.getElementById("processors").options[
             document.getElementById("processors").selectedIndex
-          ].text;
-        const selectedGPUName =
+          ];
+        const selectedGPUOption =
           document.getElementById("gpus").options[
             document.getElementById("gpus").selectedIndex
-          ].text;
-        const selectedMemoryName =
+          ];
+        const selectedMemoryOption =
           document.getElementById("memory").options[
             document.getElementById("memory").selectedIndex
-          ].text;
-        const selectedStorageName =
+          ];
+        const selectedStorageOption =
           document.getElementById("storage").options[
             document.getElementById("storage").selectedIndex
-          ].text;
-        const selectedMoboName =
+          ];
+        const selectedMoboOption =
           document.getElementById("mobos").options[
             document.getElementById("mobos").selectedIndex
-          ].text;
-        const selectedPsuName =
+          ];
+        const selectedPsuOption =
           document.getElementById("psus").options[
             document.getElementById("psus").selectedIndex
-          ].text;
-        const selectedCaseName =
+          ];
+        const selectedCaseOption =
           document.getElementById("cases").options[
             document.getElementById("cases").selectedIndex
-          ].text;
-        const selectedCoolingName =
+          ];
+        const selectedCoolingOption =
           document.getElementById("cooling").options[
             document.getElementById("cooling").selectedIndex
-          ].text;
-        const selectedPeripheralName =
+          ];
+        const selectedPeripheralOption =
           document.getElementById("peripherals").options[
             document.getElementById("peripherals").selectedIndex
-          ].text;
+          ];
+
+        const selectedProcessorName = selectedProcessorOption.text;
+        const selectedGPUName = selectedGPUOption.text;
+        const selectedMemoryName = selectedMemoryOption.text;
+        const selectedStorageName = selectedStorageOption.text;
+        const selectedMoboName = selectedMoboOption.text;
+        const selectedPsuName = selectedPsuOption.text;
+        const selectedCaseName = selectedCaseOption.text;
+        const selectedCoolingName = selectedCoolingOption.text;
+        const selectedPeripheralName = selectedPeripheralOption.text;
+
+        // Extracting the ProductID from the selected option elements
+        const selectedProcessorID = selectedProcessorOption.id;
+        const selectedGPUID = selectedGPUOption.id;
+        const selectedMemoryID = selectedMemoryOption.id;
+        const selectedStorageID = selectedStorageOption.id;
+        const selectedMoboID = selectedMoboOption.id;
+        const selectedPsuID = selectedPsuOption.id;
+        const selectedCaseID = selectedCaseOption.id;
+        const selectedCoolingID = selectedCoolingOption.id;
+        const selectedPeripheralID = selectedPeripheralOption.id;
 
         // Construct an array of selected items
         const selectedItems = [
           {
             name: selectedProcessorName,
             id: selectedProcessor,
+            index: selectedProcessorID,
           },
-          { name: selectedGPUName, id: selectedGPU },
-          { name: selectedMemoryName, id: selectedMemory },
-          { name: selectedStorageName, id: selectedStorage },
-          { name: selectedMoboName, id: selectedMobo },
-          { name: selectedPsuName, id: selectedPsu },
-          { name: selectedCaseName, id: selectedCase },
-          { name: selectedCoolingName, id: selectedCooling },
+          {
+            name: selectedGPUName,
+            id: selectedGPU,
+            index: selectedGPUID,
+          },
+          {
+            name: selectedMemoryName,
+            id: selectedMemory,
+            index: selectedMemoryID,
+          },
+          {
+            name: selectedStorageName,
+            id: selectedStorage,
+            index: selectedStorageID,
+          },
+          {
+            name: selectedMoboName,
+            id: selectedMobo,
+            index: selectedMoboID,
+          },
+          {
+            name: selectedPsuName,
+            id: selectedPsu,
+            index: selectedPsuID,
+          },
+          {
+            name: selectedCaseName,
+            id: selectedCase,
+            index: selectedCaseID,
+          },
+          {
+            name: selectedCoolingName,
+            id: selectedCooling,
+            index: selectedCoolingID,
+          },
           {
             name: selectedPeripheralName,
             id: selectedPeripheral,
+            index: selectedPeripheralID,
           },
         ];
 

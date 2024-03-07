@@ -145,6 +145,29 @@ app.post('/api/addNewItem', async (req, res) => {
   }
 });
 
+app.post('/api/transactions', async (req, res) => {
+  try {
+    const { ProductID, Transaction, Quantity, TransactionDate } = req.body;
+    if (!ProductID || !Transaction || !Quantity || !TransactionDate) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Perform the insert operation in the database
+    const connection = await pool.getConnection();
+    await connection.execute(
+      'INSERT INTO Transaction (ProductID, Transaction, Quantity, TransactionDate) VALUES (?, ?, ?, ?)',
+      [ProductID, Transaction, Quantity, TransactionDate]
+    );
+    connection.release();
+
+    // Respond with success message
+    res.status(200).json({ message: 'Transaction added successfully' });
+  } catch (error) {
+    console.error('Error adding transaction:', error);
+    res.status(500).json({ error: 'Failed to add transaction' });
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
