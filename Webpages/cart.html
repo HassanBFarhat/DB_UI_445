@@ -1,52 +1,22 @@
+<!-- 
+  This is the cart page of our store's UI for our DB Project's webpage.
+  The main function of this webpage is to display the selected products that
+  a user is looking to purchase from our store. Here will display the products
+  name, the price, and the default quantity of 1 product per person. 
+
+  Authors: Hassan Farhat
+           Avinash Bavisetty
+  Version: Winter 2024
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-      }
-
-      table {
-        width: 80%;
-        margin: 0 auto;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-
-      th {
-        background-color: #f2f2f2;
-      }
-      .checkout-btn {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        padding: 10px;
-        text-align: center;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .checkout-btn:hover {
-        background-color: #3b883e;
-      }
-    </style>
+    <link rel="stylesheet" href="../CSS Files/cart.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS Files/cart.js"></script>
   </head>
   <body>
     <h1>Shopping Cart</h1>
@@ -66,82 +36,5 @@
     <h3 id="total-price">TOTAL: $</h3>
     <br /><br />
     <button class="checkout-btn" onclick="checkOut()">Check Out</button>
-
-    <script>
-      // Sample function to handle checkout
-      function checkOut() {
-        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const transactionRequests = [];
-
-        cartItems.forEach((item) => {
-          const transactionData = {
-            ProductID: item.index,
-            Transaction: "Purchase",
-            Quantity: 1,
-            TransactionDate: new Date().toISOString().split("T")[0],
-          };
-
-          transactionRequests.push(
-            $.ajax({
-              url: "http://localhost:3000/api/transactions",
-              method: "POST",
-              data: JSON.stringify(transactionData),
-              contentType: "application/json",
-              success: function (response) {
-                // Handle successful response
-                console.log("Transaction added successfully.");
-              },
-              error: function (xhr, status, error) {
-                // Handle errors
-                console.error("Error adding transaction:", error);
-                alert(
-                  "An error occurred while adding the transaction. Please try again later."
-                );
-              },
-            })
-          );
-        });
-
-        $.when
-          .apply($, transactionRequests)
-          .then(() => {
-            localStorage.removeItem("cartItems");
-            alert("Transactions added successfully!");
-            window.location.href = "checkout.html"; // Redirect after all transactions are processed
-          })
-          .fail((xhr, status, error) => {
-            console.error("Error processing transactions:", error);
-            alert(
-              "An error occurred while processing transactions. Please try again later."
-            );
-          });
-      }
-
-      // Sample function to display cart items
-      function displayCartItems() {
-        let total = 0;
-        // Retrieve selected items from localStorage
-        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-        const cartTableBody = document.getElementById("cart-items");
-        cartTableBody.innerHTML = "";
-
-        cartItems.forEach((item) => {
-          const row = document.createElement("tr");
-          total += parseInt(item.id);
-          row.innerHTML = `
-          <td>${item.name}</td>
-          <td>$${item.id}</td>
-          <td>1</td>
-        `;
-          cartTableBody.appendChild(row);
-        });
-        const totalPriceElement = document.getElementById("total-price");
-        totalPriceElement.textContent = `TOTAL: $${total}`;
-      }
-
-      // Call the function to display cart items when the page loads
-      window.onload = displayCartItems;
-    </script>
   </body>
 </html>
