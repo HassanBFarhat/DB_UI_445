@@ -8,16 +8,16 @@
    - Be sure to have the port: 3306
      **If you dont have the MySQL Server set up, please do so with the following requirements above**
 3. Once connected to the MySQL Server, underneath the "Edit" button on the top left corner of the Workbench,
-   there will be an icon to <Open a SQL script file in a new query tab> **Click this**
-4. Then choose the file <Farhat*Hassan*&\_Bavisetty_Avinash_queries.sql> file
+   there will be an icon to "Open a SQL script file in a new query tab" **Click this**
+4. Then choose the file "Farhat*Hassan*&\_Bavisetty_Avinash_queries.sql" file
 5. Once the script is opened in the Workbench, near the top center, above the first line of the script, of
    the area where we are allowed to make changes to the script, the third icon from the left side of icons
-   should be a **Lightning Bolt** <Execute the selected portion of the script or everything, if there is no selection>
+   should be a **Lightning Bolt** "Execute the selected portion of the script or everything, if there is no selection"
    **Click this** to run the entire script and create and populate the Database
 6. You may refresh the Schema bar on the left side to see the DB addition, if you so choose to.
 7. Now, while in that left side bar, at the bottom of the bar there is an <Administration> tab **Click this**
 8. Once clicked, under the <Management> section, there should be <Users and Privilages> **Click this**
-9. Once in <Users and Privilages> you must add an admin account for out UI and API calls to work with the DB
+9. Once in <Users and Privilages> you must add an admin account for our UI and API calls to work with the DB
    - Directly beside the Schema left side bar, at the bottom on the right side of the bar, there should an
      <Add Account> button **Click this**
    - Then, when adding Details for the admin account use the following:
@@ -40,11 +40,11 @@
 10. Now that the admin user is created, **Keep the MySQL Server Running as is**
 11. You can now head to our websites repository and open it/clone it using VS Code.
     - The link to clone is: https://github.com/HassanBFarhat/DB_UI_445.git
-      ** If you don't have VS Code installed, you should install it as it was the primary IDE used for our UI project**
+      **If you don't have VS Code installed, you should install it as it was the primary IDE used for our UI project**
 12. Once cloned in VS code, and the repository is opened, you will need to download one extension to make your life
     using the website a whole lot easier. You need to install **Live Server by Ritwick Dey** extension
     - the Extension ID is: ritwickdey.LiveServer
-      ** If you do not know how to install an extension in VS Code, a simple google search or Youtube video will guide you**
+      **If you do not know how to install an extension in VS Code, a simple google search or Youtube video will guide you**
 13. Next, you're going to need to open up the terminal for the project folder, you can do so by looking at the top
     left corner of VS code, there should be a tab/button called <Terminal> **Click this**
 14. When the terminal pops up, within the terminal, write the command <nodemon server.js> then **Click Enter on Keyboard**
