@@ -1,80 +1,22 @@
+<!-- 
+  This is the main entry point to our UI for our DB Project's webpage.
+  The main function of this webpage is to display the generic name for the
+  store, allows a user to choose from various computer components, click to view cart, 
+  click to add to cart, and potentially add items they'd like to see in the store.
+
+  Authors: Hassan Farhat
+           Avinash Bavisetty
+  Version: Winter 2024
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PC PART STORE</title>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-      }
-
-      h1 {
-        margin-top: 50px;
-        margin-bottom: 20px;
-        font-size: 36px;
-        color: #333;
-      }
-
-      h2 {
-        font-size: 24px;
-        color: #666;
-      }
-
-      label {
-        width: 100px;
-        display: inline-block;
-        text-align: right;
-        margin-bottom: 5px;
-      }
-
-      select {
-        width: 15%;
-        margin-bottom: 10px;
-      }
-
-      button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
-
-      .cart-container {
-        margin-top: 30px;
-        background-color: #fff;
-        border-radius: 5px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .cart-container h3 {
-        margin-top: 0;
-        font-size: 20px;
-        color: #333;
-      }
-
-      .checkout-button {
-        margin-top: 20px;
-      }
-    </style>
+    <title>PC Part Store</title>
+    <link rel="stylesheet" href="../CSS Files/index.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../JS Files/index.js"></script>
   </head>
   <body>
     <h1>PC PART STORE</h1>
@@ -84,349 +26,36 @@
     </h2>
     <br />
     <label for="processors">Processors:</label>
-    <select id="processors">
-      <!-- Options for processors -->
-    </select>
+    <select id="processors"></select>
     <br />
     <label for="gpus">GPUs:</label>
-    <select id="gpus">
-      <!-- Options for GPUs -->
-    </select>
+    <select id="gpus"></select>
     <br />
     <label for="memory">Memory:</label>
-    <select id="memory">
-      <!-- Options for memory -->
-    </select>
+    <select id="memory"></select>
     <br />
     <label for="storage">Storage:</label>
-    <select id="storage">
-      <!-- Options for storage -->
-    </select>
+    <select id="storage"></select>
     <br />
     <label for="mobos">MOBOs:</label>
-    <select id="mobos">
-      <!-- Options for MOBOs -->
-    </select>
+    <select id="mobos"></select>
     <br />
     <label for="psus">PSUs:</label>
-    <select id="psus">
-      <!-- Options for PSUs -->
-    </select>
+    <select id="psus"></select>
     <br />
     <label for="cases">Cases:</label>
-    <select id="cases">
-      <!-- Options for cases -->
-    </select>
+    <select id="cases"></select>
     <br />
     <label for="cooling">Cooling:</label>
-    <select id="cooling">
-      <!-- Options for cooling -->
-    </select>
+    <select id="cooling"></select>
     <br />
     <label for="peripherals">Peripherals:</label>
-    <select id="peripherals">
-      <!-- Options for peripherals -->
-    </select>
+    <select id="peripherals"></select>
     <br /><br />
     <button onclick="addToCart()">Add to Cart</button>
     <br /><br />
     <a href="addNewItem.html" onclick="suggestItem()">
       Add an Item you'd like to see in the store?
     </a>
-
-    <script>
-      $.ajax({
-        url: "http://localhost:3000/api/getProcessors", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (processors) {
-          // Populate the processors dropdown with the fetched data
-          processors.forEach(function (processor) {
-            $("#processors").append(
-              `<option id = "${processor.ProductID}" value="${processor.UnitPrice}">${processor.ProductName} || Price: ${processor.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getGPUs", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (gpus) {
-          // Populate the processors dropdown with the fetched data
-          gpus.forEach(function (gpus) {
-            $("#gpus").append(
-              `<option id = "${gpus.ProductID}" value="${gpus.UnitPrice}">${gpus.ProductName} || Price: ${gpus.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getMemory", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (memory) {
-          // Populate the processors dropdown with the fetched data
-          memory.forEach(function (memory) {
-            $("#memory").append(
-              `<option id = "${memory.ProductID}" value="${memory.UnitPrice}">${memory.ProductName} || Price: ${memory.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getStorage", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (storage) {
-          // Populate the processors dropdown with the fetched data
-          storage.forEach(function (storage) {
-            $("#storage").append(
-              `<option id = "${storage.ProductID}" value="${storage.UnitPrice}">${storage.ProductName} || Price: ${storage.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getMOBOs", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (mobos) {
-          // Populate the processors dropdown with the fetched data
-          mobos.forEach(function (mobos) {
-            $("#mobos").append(
-              `<option id = "${mobos.ProductID}" value="${mobos.UnitPrice}">${mobos.ProductName} || Price: ${mobos.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getPSUs", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (psus) {
-          // Populate the processors dropdown with the fetched data
-          psus.forEach(function (psus) {
-            $("#psus").append(
-              `<option id = "${psus.ProductID}" value="${psus.UnitPrice}">${psus.ProductName} || Price: ${psus.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getCases", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (cases) {
-          // Populate the processors dropdown with the fetched data
-          cases.forEach(function (cases) {
-            $("#cases").append(
-              `<option id = "${cases.ProductID}" value="${cases.UnitPrice}">${cases.ProductName} || Price: ${cases.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getCooling", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (cooling) {
-          // Populate the processors dropdown with the fetched data
-          cooling.forEach(function (cooling) {
-            $("#cooling").append(
-              `<option id = "${cooling.ProductID}" value="${cooling.UnitPrice}">${cooling.ProductName} || Price: ${cooling.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      $.ajax({
-        url: "http://localhost:3000/api/getPeripherals", // URL of your Node.js server endpoint
-        method: "GET",
-        success: function (peripherals) {
-          // Populate the processors dropdown with the fetched data
-          peripherals.forEach(function (peripherals) {
-            $("#peripherals").append(
-              `<option id = "${peripherals.ProductID}" value="${peripherals.UnitPrice}">${peripherals.ProductName} || Price: ${peripherals.UnitPrice}</option>`
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          console.error("Error fetching processors:", error);
-        },
-      });
-
-      function openCart() {
-        // Functionality to open the cart
-
-        window.location.href = "cart.html"; // Redirect to cart.html
-      }
-
-      let selectedItems = {}; // Object to store selected items and their prices
-
-      // // Function to add selected item to the cart
-      // function addToSelectedItems(itemType) {
-      //   const select = document.getElementById(itemType);
-      //   const selectedOption = select.options[select.selectedIndex];
-      //   const itemName = selectedOption.text;
-      //   const itemPrice = parseFloat(selectedOption.value);
-      //   selectedItems[itemType] = { name: itemName, price: itemPrice };
-      //   // Display the price next to the selected item in the dropdown
-      //   select.nextElementSibling.textContent = " - $" + itemPrice.toFixed(2);
-      // }
-
-      function addToCart() {
-        // Gets all products speicified index value
-        const selectedProcessor = document.getElementById("processors").value;
-        const selectedGPU = document.getElementById("gpus").value;
-        const selectedMemory = document.getElementById("memory").value;
-        const selectedStorage = document.getElementById("storage").value;
-        const selectedMobo = document.getElementById("mobos").value;
-        const selectedPsu = document.getElementById("psus").value;
-        const selectedCase = document.getElementById("cases").value;
-        const selectedCooling = document.getElementById("cooling").value;
-        const selectedPeripheral = document.getElementById("peripherals").value;
-
-        // Gets the selected option element for each product
-        const selectedProcessorOption =
-          document.getElementById("processors").options[
-            document.getElementById("processors").selectedIndex
-          ];
-        const selectedGPUOption =
-          document.getElementById("gpus").options[
-            document.getElementById("gpus").selectedIndex
-          ];
-        const selectedMemoryOption =
-          document.getElementById("memory").options[
-            document.getElementById("memory").selectedIndex
-          ];
-        const selectedStorageOption =
-          document.getElementById("storage").options[
-            document.getElementById("storage").selectedIndex
-          ];
-        const selectedMoboOption =
-          document.getElementById("mobos").options[
-            document.getElementById("mobos").selectedIndex
-          ];
-        const selectedPsuOption =
-          document.getElementById("psus").options[
-            document.getElementById("psus").selectedIndex
-          ];
-        const selectedCaseOption =
-          document.getElementById("cases").options[
-            document.getElementById("cases").selectedIndex
-          ];
-        const selectedCoolingOption =
-          document.getElementById("cooling").options[
-            document.getElementById("cooling").selectedIndex
-          ];
-        const selectedPeripheralOption =
-          document.getElementById("peripherals").options[
-            document.getElementById("peripherals").selectedIndex
-          ];
-
-        const selectedProcessorName = selectedProcessorOption.text;
-        const selectedGPUName = selectedGPUOption.text;
-        const selectedMemoryName = selectedMemoryOption.text;
-        const selectedStorageName = selectedStorageOption.text;
-        const selectedMoboName = selectedMoboOption.text;
-        const selectedPsuName = selectedPsuOption.text;
-        const selectedCaseName = selectedCaseOption.text;
-        const selectedCoolingName = selectedCoolingOption.text;
-        const selectedPeripheralName = selectedPeripheralOption.text;
-
-        // Extracting the ProductID from the selected option elements
-        const selectedProcessorID = selectedProcessorOption.id;
-        const selectedGPUID = selectedGPUOption.id;
-        const selectedMemoryID = selectedMemoryOption.id;
-        const selectedStorageID = selectedStorageOption.id;
-        const selectedMoboID = selectedMoboOption.id;
-        const selectedPsuID = selectedPsuOption.id;
-        const selectedCaseID = selectedCaseOption.id;
-        const selectedCoolingID = selectedCoolingOption.id;
-        const selectedPeripheralID = selectedPeripheralOption.id;
-
-        // Construct an array of selected items
-        const selectedItems = [
-          {
-            name: selectedProcessorName,
-            id: selectedProcessor,
-            index: selectedProcessorID,
-          },
-          {
-            name: selectedGPUName,
-            id: selectedGPU,
-            index: selectedGPUID,
-          },
-          {
-            name: selectedMemoryName,
-            id: selectedMemory,
-            index: selectedMemoryID,
-          },
-          {
-            name: selectedStorageName,
-            id: selectedStorage,
-            index: selectedStorageID,
-          },
-          {
-            name: selectedMoboName,
-            id: selectedMobo,
-            index: selectedMoboID,
-          },
-          {
-            name: selectedPsuName,
-            id: selectedPsu,
-            index: selectedPsuID,
-          },
-          {
-            name: selectedCaseName,
-            id: selectedCase,
-            index: selectedCaseID,
-          },
-          {
-            name: selectedCoolingName,
-            id: selectedCooling,
-            index: selectedCoolingID,
-          },
-          {
-            name: selectedPeripheralName,
-            id: selectedPeripheral,
-            index: selectedPeripheralID,
-          },
-        ];
-
-        // Store selected items in localStorage
-        localStorage.setItem("cartItems", JSON.stringify(selectedItems));
-
-        alert("Items added to the cart successfully!");
-      }
-
-      function suggestItem() {
-        // Functionality to handle user suggestion for new item
-      }
-    </script>
   </body>
 </html>
