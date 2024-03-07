@@ -1,56 +1,26 @@
+<!-- 
+  This is the add new item to the store UI for our DB Project's webpage.
+  The main function of this webpage is to add any PC part that falls under one of the
+  categories that is shown on the DB. 
+
+  Authors: Hassan Farhat
+           Avinash Bavisetty
+  Version: Winter 2024
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add New Item</title>
-    <style>
-      body {
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-      }
-
-      h2 {
-        margin-top: 50px;
-        margin-bottom: 20px;
-        font-size: 36px;
-        color: #333;
-      }
-
-      label {
-        width: 120px;
-        display: inline-block;
-        text-align: right;
-        margin-bottom: 5px;
-      }
-
-      select {
-        width: 15%;
-        /* margin-bottom: 10px; */
-      }
-
-      #category {
-        width: 9%;
-      }
-
-      button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
-    </style>
+    <link rel="stylesheet" href="../CSS Files/addNewItem.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../JS Files/addNewItem.js"></script>
   </head>
   <body>
     <h2>Add Item To Store</h2>
@@ -80,46 +50,5 @@
       <input type="number" id="price" name="price" required /><br /><br />
       <button type="button" onclick="addItemToStore()">Add Item</button>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script>
-      function addItemToStore() {
-        // Retrieve form data
-        var category = $("#category").val();
-        var brand = $("#brand").val();
-        var productName = $("#productName").val();
-        var price = $("#price").val();
-
-        // Create an object with the form data
-        var requestData = {
-          CategoryID: category,
-          Brand: brand,
-          ProductName: productName,
-          UnitPrice: price
-        };
-
-        // Make an AJAX request to update the item on the server
-        $.ajax({
-          url: "http://localhost:3000/api/addNewItem",
-          type: "POST",
-          data: JSON.stringify(requestData), // Convert data to JSON
-          contentType: "application/json", // Set content type to JSON
-          success: function (response) {
-            // Handle successful response
-            alert("Item added successfully.");
-            // Optionally, you can redirect the user back to the index.html page after adding the item
-            window.location.href = "index.html";
-          },
-          error: function (xhr, status, error) {
-            // Handle errors
-            console.error("Error adding item:", error);
-            alert("An error occurred while adding the item. Please try again later.");
-          },
-        });
-      }
-    </script>
   </body>
 </html>
